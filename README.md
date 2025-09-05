@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Ignite Bulk Uploader
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Lightweight web app to upload up to 10 videos at a time to Ignite Video Cloud.
 
-## Available Scripts
+Features:
 
-In the project directory, you can run:
+- Per-file progress bars using axios upload progress
+- Set each video title to the file name automatically
+- Select visibility (private/public) for all uploads
+- Configurable API Base URL and API token (both persisted locally)
+- Poll processing status every 10 seconds after upload
 
-### `npm start`
+Docs: See the Ignite Video API for creating and uploading videos: [Create video / upload docs](https://docs.ignite.video/api-reference/videos/create)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Quick start
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Requirements: Node 18+ (or latest LTS)
 
-### `npm test`
+```bash
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open http://localhost:3000, paste your Bearer token, set API Base if needed, select up to 10 video files, choose visibility, and click Upload All.
 
-### `npm run build`
+## Build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This outputs a static build in `build/` you can host on any static server (e.g. GitHub Pages, Netlify, S3 + CloudFront).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Configuration
 
-### `npm run eject`
+- API Token: Paste into the API Token field. Stored in `localStorage` under `ignite_token`.
+- API Base: Defaults to `https://app.ignitevideo.cloud/api`. Stored in `localStorage` under `ignite_api_base`. Trailing slash is removed automatically.
+- Visibility: Choose `private` or `public` prior to upload.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Development notes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- This app intentionally avoids extra dependencies and uses Create React App for simplicity.
+- Upload flow:
+  1. Create video via `PUT /videos/upload` to receive signed URL
+  2. Upload file directly to signed URL via `PUT`
+  3. Poll `/videos/{VIDEO_ID}` every 10s until terminal state (e.g., COMPLETE)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT © Contributors
