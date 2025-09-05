@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bulk-uploader/static/css/main.dd0e2c56.css",
+    "main.js": "/bulk-uploader/static/js/main.b2b93566.js",
+    "index.html": "/bulk-uploader/index.html",
+    "main.dd0e2c56.css.map": "/bulk-uploader/static/css/main.dd0e2c56.css.map",
+    "main.b2b93566.js.map": "/bulk-uploader/static/js/main.b2b93566.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd0e2c56.css",
+    "static/js/main.b2b93566.js"
+  ]
+}
